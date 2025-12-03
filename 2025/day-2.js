@@ -19,7 +19,7 @@ function findInvalid(range) {
             const currentNumStrFirst = currentNumStr.slice(0, currentPlace);
             const currentNumStrLast = currentNumStr.slice(currentPlace);
             if (currentNumStrFirst === currentNumStrLast) {
-                hits++;
+                hits += currentNum;
                 console.log(`Hit: ${currentNumStr}`);
             }
             currentPlace++;
