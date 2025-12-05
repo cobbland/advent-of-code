@@ -20,7 +20,6 @@ function checkRolls(allRolls = toiletPaper) {
         for (let rollIndex = 0; rollIndex < columns; rollIndex++) {
             const adjacentRolls = [];
             let adjacentRollsCount = 0;
-            // All the "if" logic needs to be fixed
             if (rowIndex != 0) {
                 adjacentRolls.push(allRolls[rowIndex-1][rollIndex]);
                 if (rollIndex != 0) {
@@ -31,7 +30,6 @@ function checkRolls(allRolls = toiletPaper) {
                 }
             }
             if (rowIndex != rows - 1) {
-                // Fails here because it cannot find the below
                 adjacentRolls.push(allRolls[rowIndex+1][rollIndex]);
                 if (rollIndex != 0) {
                     adjacentRolls.push(allRolls[rowIndex+1][rollIndex-1]);
