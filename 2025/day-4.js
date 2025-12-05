@@ -1,0 +1,61 @@
+// Imports
+const fs = require('fs');
+const path = require('path');
+
+// Get the data
+const toiletPaper = fs
+    .readFileSync(path.join(__dirname, 'data/day-4-input.txt'))
+    .toString()
+    .split('\n');
+
+function checkRolls(allRolls = toiletPaper) {
+    let accessibleRolls = 0;
+    const rows = allRolls.length;
+    const columns = allRolls[0].length;
+    let ran = 0;
+    for (let rowIndex in allRolls) {
+        for (let rollIndex in allRolls[rowIndex]) {
+            let adjacentRollsCount = 0;
+            const adjacentRolls = [];
+            // All the "if" logic needs to be fixed
+            if (rowIndex != 0) {
+                adjacentRolls.push(allRolls[rowIndex-1][rollIndex]);
+                if (rollIndex != 0) {
+                    adjacentRolls.push(allRolls[rowIndex-1][rollIndex-1]);
+                }
+                if (rollIndex != columns - 1) {
+                    adjacentRolls.push(allRolls[rowIndex-1][rollIndex+1])
+                }
+            }
+            if (rowIndex != rows - 1) {
+                // Fails here because it cannot find the below
+                adjacentRolls.push(allRolls[rowIndex+1][rollIndex]);
+                if (rollIndex != 0) {
+                    adjacentRolls.push(allRolls[rowIndex+1][rollIndex-1]);
+                }
+                if (rollIndex != columns - 1) {
+                    adjacentRolls.push(allRolls[rowIndex+1][rollIndex+1])
+                }
+            }
+            if (rollIndex != 0) {
+                adjacentRolls.push(allRolls[rowIndex][rollIndex-1]);
+            }
+            if (rollIndex != columns - 1) {
+                adjacentRolls.push(allRolls[rowIndex][rollIndex+1]);
+            }
+            for (let roll of adjacentRolls) {
+                if (roll === '@') {
+                    adjacentRollsCount++;
+                }
+            }
+            if (adjacentRollsCount < 4) {
+                accessibleRolls++;
+            }
+            ran++
+            console.log(ran);
+        }
+    }
+    return accessibleRolls;
+}
+
+console.log(checkRolls());
