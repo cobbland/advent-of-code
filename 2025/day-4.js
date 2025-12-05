@@ -12,11 +12,14 @@ function checkRolls(allRolls = toiletPaper) {
     let accessibleRolls = 0;
     const rows = allRolls.length;
     const columns = allRolls[0].length;
-    let ran = 0;
-    for (let rowIndex in allRolls) {
-        for (let rollIndex in allRolls[rowIndex]) {
-            let adjacentRollsCount = 0;
+    const allRollsArrays = [];
+    let allRollsStrings = '';
+    for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
+        const rowArray = allRolls[rowIndex].toString().split('');
+        allRollsArrays.push(rowArray);
+        for (let rollIndex = 0; rollIndex < columns; rollIndex++) {
             const adjacentRolls = [];
+            let adjacentRollsCount = 0;
             // All the "if" logic needs to be fixed
             if (rowIndex != 0) {
                 adjacentRolls.push(allRolls[rowIndex-1][rollIndex]);
@@ -48,14 +51,18 @@ function checkRolls(allRolls = toiletPaper) {
                     adjacentRollsCount++;
                 }
             }
-            if (adjacentRollsCount < 4) {
+            if (adjacentRollsCount < 4 && allRollsArrays[rowIndex][rollIndex] == "@") {
+                allRollsArrays[rowIndex][rollIndex] = 'x';
                 accessibleRolls++;
             }
-            ran++
-            console.log(ran);
         }
+        allRollsArrays[rowIndex] = allRollsArrays[rowIndex].join('');
     }
+    allRollsStrings = allRollsArrays.join('\n');
+    console.log(allRollsStrings);
     return accessibleRolls;
 }
 
 console.log(checkRolls());
+
+// First "successful" run produced 2382, which is too high
