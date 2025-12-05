@@ -73,5 +73,3 @@ function checkRolls(wearHouse = toiletPaper) {
 }
 
 console.log(checkRolls());
-
-// First "successful" run produced 2382, which is too high
